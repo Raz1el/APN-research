@@ -1,37 +1,378 @@
-\documentclass[11pt]{beamer}
-\usetheme{Copenhagen}
-\usepackage[utf8]{inputenc}
+\documentclass{beamer}
 \usepackage[T2A]{fontenc}
-\usepackage[russian]{babel}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-%\author{}
-%\title{}
-%\setbeamercovered{transparent} 
-%\setbeamertemplate{navigation symbols}{} 
-%\logo{} 
-%\institute{} 
-%\date{} 
-%\subject{} 
+\usepackage[utf8]{inputenc}
+%\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsfonts,amsmath,mathtext}
+\usepackage{graphicx} % Подключаем пакет для вставки картинок (с драйвером dvips).
+%\usepackage{color}
+\usepackage{ragged2e}
+\usepackage{pdfpages}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage[rightcaption]{sidecap}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{array, makecell}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\beamertemplatenavigationsymbolsempty
+\usepackage{enumitem}
+\usepackage[makeroom]{cancel}
+%\usepackage[dvipsnames]{xcolor}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mygreen}{RGB}{66, 189, 107}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{mygreen},
+  breaklines=true,
+  texcl=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\floatname{algorithm}{Алгоритм}
+\algrenewcommand\algorithmicif{\textbf{Если}}
+\algrenewcommand\algorithmicelse{\textbf{иначе}}
+\algrenewcommand\algorithmicthen{\textbf{тогда}}
+\algrenewcommand\algorithmicrequire{\textbf{Вход:}}
+\algrenewcommand\algorithmicensure{\textbf{Выход:}}
+\algrenewcommand\algorithmicreturn{\textbf{Вернуть}}
+\algrenewcommand\algorithmicfor{\textbf{Для}}
+\algrenewcommand\algorithmicdo{\textbf{сделать}}
+
+
+
+
+
+
+
+\setlist[enumerate]{labelsep=0.5pc, labelindent=1.5pc, labelwidth=1.5pc, font=\sffamily\bfseries}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*}
+\setlist[enumerate,2]{label=\emph{\alph*}),
+ref=\theenumi.\emph{\alph*}}
+\setlist[enumerate,3]{label=\roman*), ref=\theenumii.\roman*}
+\setlist[itemize]{leftmargin=*}
+\setlist[itemize,1]{label=$\bullet$}
+
+
+\setcounter{MaxMatrixCols}{30}
+\justifying
+
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+%\usetheme{Singapore}
+%\usetheme{boxes}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\defbeamertemplate*{footline}{shadow theme}
+{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.8\paperwidth,ht=2.5ex,dp=1.125ex,,center]{title in head/foot}%
+    \insertshorttitle\hfill
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.5ex,dp=1ex,center]{author in head/foot}%
+    \insertframenumber\,/\,\inserttotalframenumber\hfill
+  \end{beamercolorbox}}%
+}
+
+\newcommand{\jj}{\righthyphenmin=20 \justifying}
+\newcommand{\setpsi}[1]{\underset{\ket{\psi_{#1}}}{\uparrow}}
+
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{remark}{Замечание}
+\newtheorem*{property}{Свойство}
+\newtheorem{proposition}{Предложение}
+\newtheorem{question}{Вопрос}
+%\theoremstyle{definition}
+%\newtheorem{conjecture}{Гипотеза}
+
+
+
+\usepackage{environ}         % provides \BODY
+\usepackage{etoolbox}        % provides \ifdimcomp
+\usepackage{graphicx}        % provides \resizebox
+
+\newlength{\myl}
+\let\origequation=\equation
+\let\origendequation=\endequation
+
+\RenewEnviron{equation}{
+  \settowidth{\myl}{$\BODY$}                       % calculate width and save as \myl
+  \origequation
+  \ifdimcomp{\the\linewidth}{>}{\the\myl}
+  {\ensuremath{\BODY}}                             % True
+  {\resizebox{\linewidth}{!}{\ensuremath{\BODY}}}  % False
+  \origendequation
+}
+
+
+
+
+
+
+\deftranslation[to=russian]{Theorem}{Теорема}
+\deftranslation[to=russian]{Definition}{Определение}
+\deftranslation[to=russian]{Lemma}{Лемма}\deftranslation[to=russian]{Corollary}{Следствие}
+
+\title{Разработка эвристических методов построения подстановок с низкой дифф. равномерностью}
+\author{\and}
+\institute{Летняя школа-конференция <<Криптография и информационная безопасность>>}
+\date[]{\today}
+\centering
+
 \begin{document}
-
-%\begin{frame}
-%\titlepage
-%\end{frame}
-
-%\begin{frame}
-%\tableofcontents
-%\end{frame}
-
-%------------------------------------------------------------
-
-\begin{frame}{ВВЕДЕНИЕЕЕЕЕ}
-ВВЕДЕНИЕ
+%\maketitle
+\justifying
+\begin{frame}
+    \titlepage
 \end{frame}
-\begin{frame}{АЛГ}
-АЛГОРИТМ ПЕРЕСЧЕТА
+
+\begin{frame}{Введение}
+\begin{itemize}
+    \item Актуальность симметричных шифров
+    \item Важность нахождения S- и P-блоков с нужными качествами для обеспечения криптографической стойкости.
+\end{itemize}
 \end{frame}
+
+\begin{frame}{Основные определения}
+
+\begin{block}{Определение}
+    Для $n \in \mathbb{N}$, отображение вида $\mathbb{F}_{2}^{n} \xrightarrow{} \mathbb{F}_{2}$, где $\mathbb{F}_{2}$ --- поле из двух элементов, называется \textit{булевой функцией}.
+    Отображения вида $\mathbb{F}_{2}^{n} \xrightarrow{} \mathbb{F}_{2}^{m}$, где $m \in \mathbb{N}$, называются \textit{векторными булевыми функциями} (или $(n, m)$-\textit{функциями}).
+\end{block}
+$(n,m)-$функцию $F(x_1,...,x_n)$ можно задать $m$ булевыми функциями от $n$ переменных:
+$$F(x_1, \dots ,x_n) = (f_1(x_1\dots x_n),\dots,f_m(x_1,\dots, x_n)).$$
+Функции $f_i$ называются \textit{координатными функциями}, а произвольная ненулевая линейная комбинация координатных функций называется \textit{компонентной функцией}.
+\end{frame}
+
+
+
+\begin{frame}{Криптографические характеристики функций}
+\begin{block}{Определение}
+Алгебраической степенью булевой функции называется степень ее полинома Жегалкина.
+\end{block}
+\begin{block}{Определение}
+Нелинейностью булевой функции $f$ от $n$ переменных называется величина $N_f$, равная расстоянию Хэмминга от $f$ до множества $\mathcal{A}_n$ всех аффинных функций от $n$ переменных.
+\end{block}
+
+\begin{block}{Определение}
+Алгебраической иммунностью $AI(f)$ функции $f$ называется такое наименьшее число $d$, что существует аннулатор $g$ степени $d$, не тождественно равный нулю, либо для функции $f$, либо для $f \oplus 1$
+\end{block}
+\end{frame}
+
+\begin{frame}{Криптографические характеристики функций}
+Криптографические характеристики булевых функций можно перенести на векторный случай
+   \begin{block}{Определение}
+Минимальной алгебраической степенью векторной булевой функции называется наименьшая из алгебраических степеней ее компонентных функций.
+\end{block} 
+\begin{block}{Определение}
+Нелинейностью векторной булевой функции называется наименьшая из нелинейностей ее компонентных функций.
+\end{block} 
+\begin{block}{Определение}
+Алгебраической иммуностью векторной булевой функции называется наименьшая из алгебраических иммуностей ее компонентных функций.
+\end{block} 
+\end{frame}
+
+\begin{frame}{Криптографические характеристики функций}
+\begin{block}{Определение}
+Векторная булева $(n,m)$-функция $f$ называется \textit{дифференциально $\delta$-равномерной}, если для любых $a \neq 0, b \in \mathbb{F}_{2}^{n}$ уравнение $$f(x) + f(x + a) = b$$ имеет не более $\delta$ решений в $\mathbb{F}_{2}^{n}$. Наименьшее такое число $\delta$ называется \textit{показателем дифференциальной равномерности}.
+\end{block}
+
+\begin{block}{Определение}
+    Отображение $$f: \mathbb{F}_{2}^{n} \xrightarrow{} \mathbb{F}_{2}^{n}$$
+    называется \textit{APN-отображением}, если оно дифференциально $2$-равномерно.
+\end{block}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+\begin{tikzpicture}
+
+    \node (Q1) at (0,0) {$S(\mathbb{F}_{2^n})$};
+    \node (Q2) at (1,2) {$f(x) = \sum\limits_{i=0}^n a_ix^i$};
+    \node (Q3) at (0,4) {APN-отображения};
+    \node (Q4) at (-3,2) {$F(x_1,...,x_n) = (f_1(x),...,f_n(x))$};
+
+    \draw (Q1)--(Q2);
+    \draw (Q1)--(Q4);
+    \draw (Q3)--(Q4);
+    \draw (Q2)--(Q3);
+    \draw [dashed,red, out=-1,in=0,distance=3cm](Q1) to node [pos=0.5, right,inner sep=0.25cm] {?}(Q3);
+
+    \end{tikzpicture}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+Рассмотрим симметрическую группу $S(\Omega)$ на множестве $\Omega$ из $n$ элементов.
+\begin{itemize}
+\item Расстоянием между подстановками $f,g \in S(\Omega)$  называется величина $$d(f,g) = |\{ x \in \Omega \; | \; f(x) \neq g(x)\} |$$
+
+\item Расстоянием между подгруппами $G,G' \leq S(\Omega)$ назовем $$d(G,G') = \min_{\substack{g \in G \setminus \{e\}  \\ g' \in G' \setminus \{e\}  }} d(g ,g')$$
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+\begin{itemize}
+\item Далее будем рассматривать $\Omega = \mathbb{F}_{2^n}$
+\item Любой элемент поля $\alpha \in \mathbb{F}_{2^n}$ определяет биективное отображение 
+\begin{alignat*}{2}
+\tau_{\alpha} \colon \mathbb{F}_{2^n}&\rightarrow {}&& \mathbb{F}_{2^n} \\
+           x&\mapsto     {}&& x + \alpha \\        
+\end{alignat*}
+\item Множество таких отображений $T = \{ \tau_{ \alpha } \; | \; \alpha \in \mathbb{F}_{2^n} \}$ образует подгруппу симметрической группы $S(\mathbb{F}_{2^n})$
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+В работе использовалась следующая комбинаторная характеризация дифференциальной равномерности:
+\begin{block}{Утверждение}
+Пусть $f \in S(\mathbb{F}_{2^n})$, $T$ -- группа сдвигов, определенная выше, а $$G = f^{-1} \cdot T \cdot f = \{f^{-1} \cdot t \cdot f | t \in T \}.$$ Тогда подстановка f является дифференциально $\delta$-равномерной $ \iff d(G,T) = 2^n-\delta$
+\end{block}
+
+\end{frame}
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+    тут будет пример
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+Тут аккуратно сформулировать цели и задачи проекта
+\end{frame}
+
+
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+\begin{itemize}
+    \item Рассмотрим $\pi \in S(\mathbb{F}_{2^n})$ и $G = \pi^{-1} \cdot T \cdot \pi$.
+    \item Пусть $N = |\mathbb{F}_{2^{n}}|$, $G = \{g_{1}, \dots, g_{N - 1}\}$, $T = \{t_{1}, \dots, t_{N - 1}\}$.
+    \item Каждый элемент $t_i$ раскладывается в произведение независимых транспозиций $t_i=\tau_1^i \dots \tau_{\frac{N}{2}}^i$.
+    \item Зафиксируем некоторый элемент $g = \sigma_{1}\dots\sigma_{\frac{N}{2}} \in G$.
+    \item Определим множество $I(t_{i}, g) \stackrel{\text{def}}{:=} t_{i} \cap g$.
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Сложность построения множества $I(t_i,g)$ равна $O(N)$ и  $d(t_{i}, g) = N - 2 |I(t_{i}, g)|$
+\end{block}
+
+
+
+
+\end{frame}
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+\begin{itemize}
+    \item Определим
+$$I(g) \stackrel{\text{def}}{:=} \{I(t_{i}, g) \text{ } | \text{ } t_{i} \in T \},$$
+$$D(g) \stackrel{\text{def}}{:=} (I(g), \underset{i \in I(g)}{\max} {\{2 \cdot|i| \}})$$
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Сложность построения $D(g)$ равна $O(N^{2})$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+\begin{itemize}
+    \item Определим множество $\Delta(G) \stackrel{\text{def}}{:=} \{D(g) \text{ } | \text{ } g \in G\}$. 
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Дифференциальная равномерность подстановки $\pi$ равна $$\delta = \underset{(d_{1}, d_{2}) \in \Delta(G)}{\max} \{d_{2} \}.$$ Сложность вычисления $\delta$ равна $O(N^{3})$.
+\end{block}
+
+
+Сложность классического алгоритма $O(N^2)$...
+\end{frame}
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+
+Пусть $I(t_i,g)$ уже построено и $\sigma = (\alpha \beta)$ -- некоторая транспозиция.
+
+Тогда вычислить $I(t_i,\sigma^{-1}g\sigma)$ можно следующим образом:
+\begin{itemize}
+\item Если $\sigma = \sigma_i$, то $I(t_i,g)=I(t_i,\sigma^{-1}g\sigma)$
+\item Пусть $\sigma \neq \sigma_i$. Тогда $\exists \sigma_s=(\alpha, \alpha'),\sigma_r=(\beta, \beta')$ в разложении $g$. Тогда $$\sigma^{-1}g\sigma = \sigma_1...\sigma_s'...\sigma_r'...\sigma_{\frac{N}{2}}, \text{ где } \sigma_s'=(\beta, \alpha'),\sigma_r'=(\alpha, \beta').$$
+Таким образом $I(t_i, \sigma^{-1}g\sigma)$ получается из $I(t_i,g)$ удалением $\sigma_s,\sigma_r$ (если они там есть) и добавлением $\sigma_s',\sigma_r'$ (при условии, что они есть в разложении $t_i$)
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Сложность вычисления $I(t_i,\sigma^{-1}g\sigma)$ по известному $I(t_i,g)$ равна $O(1)$.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+
+Для вычисления множества $D(\sigma^{-1}g\sigma)$ по $D(g) = (I(g), d)$ нужно:
+\begin{itemize}
+\item Если $\sigma = \sigma_i$, то $D(g)$ не изменится
+\item Найти сдвиги $t(\sigma_s), t(\sigma_r), t(\sigma_s'), t(\sigma_r')$ и пересчитать $I(t(\sigma_s),g)$, $I(t(\sigma_r),g)$, $I( t(\sigma_s'),g)$, $I(t(\sigma_r'),g)$
+\item Обновить максимальное значение $d$.
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Сложность вычисления $D(\sigma^{-1}g\sigma)$ по известному $D(g)$ равна $O(1)$.
+\end{block}
+
+\begin{block}{Утверждение}
+ Сложность вычисления $\Delta(\sigma^{-1} G  \sigma)$ по известному $\Delta(G)$ равна $O(N)$.
+\end{block}
+\end{frame}
+
+
+
+
 
 \begin{frame}{Подходы к построению подстановок с низкой дифф. равномерностью}
 
@@ -58,6 +399,39 @@
 
 %------------------------------------------------------------
 
+
+\begin{frame}{Результаты}
+Используя построенные алгоритмы, проводились вычислительные эксперименты. Была построена подстановка на $\mathbb{F}_{2^8}$:
+$$\scriptscriptstyle \pi = (1, 17, 29, 209, 85, 91, 54, 34, 95, 157, 255, 147, 128, 25, 23, 75, 113, 72, 87, 156, 204, 102, 130,227, 121, 44, 19, 151, $$
+$$\scriptscriptstyle137, 123, 243, 237, 165, 61, 27, 183, 142, 88, 70, 191, 163, 170, 99, 20, 103, 146, 166, 139, 111, 182, 31, 59, 154, 116, 150,$$
+$$\scriptscriptstyle 160, 196, 7, 205, 48, 21, 241, 153, 112, 178, 189, 93, 198, 253, 201, 3, 225, 5, 172, 155, 242, 175, 176, 184, 108, 122, 28, 190,$$
+$$\scriptscriptstyle 77, 194, 42, 132, 129, 148, 52, 79, 131, 152, 246,05, 186, 109, 219, 248, 134, 9, 35, 217, 211, 64, 149, 249, 222, 164, 226, 30, $$
+$$\scriptscriptstyle41, 74, 229, 117, 254, 221, 199,145, 15, 81, 218, 247, 212, 51, 47, 119, 144, 200, 159, 60, 181, 173, 65, 4, 8, 236, 104, 208, 43, $$
+$$\scriptscriptstyle71, 233, 136,50, 115, 207, 140, 63, 107, 6, 86, 214, 203, 216, 223, 101, 228, 49, 67, 239, 114, 138, 83, 53, 13, 124, 180, 96,234,$$
+$$\scriptscriptstyle 22, 231, 210, 16, 26, 125, 82, 100, 206, 18, 94, 24, 169, 106, 69, 202, 126, 11, 141, 12, 250, 133, 193, 33,251, 92, 98, 174, 185,$$
+$$\scriptscriptstyle 252, 90, 158, 197, 188, 118, 127, 80, 57, 215, 135, 45, 56, 162, 10, 195, 36, 62, 177, 245,213, 58, 110, 192, 2, 40, 167, 168, 143,$$
+$$\scriptscriptstyle 38, 66, 187, 39, 240, 68, 220, 32, 120, 76, 55, 97, 161, 235, 46, 37, 14,78, 89, 73, 238, 171, 232, 230, 179, 84, 224, 244, 0).$$
+
+\end{frame}
+
+\begin{frame}{Результаты}
+\begin{table}[h!]
+\centering
+\caption{Таблица 1}
+\label{tab:permutation_comparision}
+\begin{tabular}{|m{4cm}|c|c|c|c|} % Используем m-колонки для принудительного многострочного режима
+\hline
+&\textbf{$\pi_{AES}$}&\textbf{$\pi_{Kuznechik}$}&\textbf{$\pi_{Jimenez}$\footnotemark[1]}&\textbf{$\pi$}\\ \hline
+\makecell[c]{Дифференциальная\\равномерность}&4&8&6&6\\\hline
+\makecell[c]{Нелинейность}&112&100&104&100\\\hline
+\makecell[c]{Минимальная\\алгебраическая\\степень}&7&7&7&7\\\hline
+\makecell[c]{Алгебраическая\\иммунность}&4&4&4&4\\\hline
+\end{tabular}
+\end{table}
+
+\footnotetext[1]{R. A. de la Cruz Jimenez, “Constructing 8-bit permutations, 8-bit involutions and 8-bit orthomorphisms with almost optimal cryptographic parameters”, Матем. вопр. криптогр., 12:3 (2021), 89–124}
+\end{frame}
+
 \begin{frame}{Направления дальнейшего исследования}
 
 \begin{itemize}
@@ -68,9 +442,8 @@
 
 \end{frame}
 
-\begin{frame}{ЭКСП}
-ВЫЧИСЛИТЕЛЬНЫЕ ЭКСПЕРИМЕНТЫ
-\end{frame}
-%------------------------------------------------------------
 
+\begin{frame}
+\huge{\centerline{Спасибо за внимание!}}
+\end{frame}
 \end{document}
