@@ -17,6 +17,13 @@
 \usepackage{mathtools}
 \usepackage{tikz}
 \usepackage{array, makecell}
+
+\usepackage{array}   % Для улучшенного форматирования таблиц
+\usepackage{amsmath}  % Для математических символов
+\usepackage{booktabs} % Для профессиональных таблиц
+\usepackage{stackengine} 
+\usepackage{xcolor}
+
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \beamertemplatenavigationsymbolsempty
@@ -277,17 +284,56 @@ $$F(x_1, \dots ,x_n) = (f_1(x_1\dots x_n),\dots,f_m(x_1,\dots, x_n)).$$
 
 
 \begin{frame}{Комбинаторное описание дифференциальной равномерности}
-    тут будет пример
+    $$\pi = (2,5)(3,6)(4,7) \in \mathbb{F}_{2^3}$$
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}c@{\hspace{1em}}c@{\hspace{1em}}c@{}}
+
+ $T$ & \multicolumn{1}{c}{\stackunder{$\rightarrow$}{\footnotesize $\pi^{-1} \cdot T \cdot \pi$}} &  $G$ \\
+
+$(0,1)(2,3)(4,5)(6,7)$ & & $(0,1)(2,7)(3,4)(5,6)$ \\
+$(0,2)(1,3)(4,6)(5,7)$ &  & $(0,5)(1,6)(2,4)(3,7)$ \\
+$(0,3)(1,2)(4,7)(5,6)$ & & $(0,6)(1,5)(2,3)(4,7)$ \\
+$(0,4)(1,5)(2,6)(3,7)$ & & $(0,7)(1,2)(3,5)(4,6)$ \\
+$(0,5)(1,4)(2,7)(3,6)$ &  & $(0,2)(1,7)(3,6)(4,5)$ \\
+$(0,6)(1,7)(2,4)(3,5)$ &  & $(0,3)(1,4)(2,6)(5,7)$ \\
+$(0,7)(1,6)(2,5)(3,4)$ & & $(0,4)(1,3)(2,5)(6,7)$ \\
+
+\end{tabular}
+\end{table}
+\end{frame}
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+    $$\sigma = \pi \cdot \textcolor{red}{(2,3)} = (2,5)(3,6)(4,7)\textcolor{red}{(2,3)} = \textcolor{red}{(2,5,3,6)(4,7)} \in \mathbb{F}_{2^3}$$
+    $$\sigma^{-1} \cdot T \cdot \sigma = \textcolor{red}{(2,3)}\cdot(\pi^{-1} \cdot T \cdot \pi)\cdot\textcolor{red}{(2,3)}=\textcolor{red}{(2,3)}\cdot G \cdot \textcolor{red}{(2,3)}$$
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}c@{\hspace{1em}}c@{\hspace{1em}}c@{}}
+
+ $G$ & \multicolumn{1}{c}{\stackunder{$\rightarrow$}{\footnotesize $\textcolor{red}{(2,3)} \cdot G \cdot \textcolor{red}{(2,3)}$}} &  $G'$ \\
+ 
+
+$(0,1)(\textcolor{red}{2},7)(\textcolor{red}{3},4)(5,6)$& &  $(0,1)(\textcolor{red}{2},4)(\textcolor{red}{3},7)(5,6)$\\
+$(0,5)(1,6)(\textcolor{red}{2},4)(\textcolor{red}{3},7)$& &  $(0,5)(1,6)(\textcolor{red}{2},7)(\textcolor{red}{3},4)$\\
+$(0,6)(1,5)(\textcolor{red}{2},\textcolor{red}{3})(4,7)$& &  $(0,6)(1,5)(\textcolor{red}{2},\textcolor{red}{3})(4,7)$\\
+$(0,7)(1,\textcolor{red}{2})(\textcolor{red}{3},5)(4,6)$& &  $(0,7)(1,\textcolor{red}{3})(\textcolor{red}{2},5)(4,6)$\\
+$(0,\textcolor{red}{2})(1,7)(\textcolor{red}{3},6)(4,5)$& &  $(0,\textcolor{red}{3})(1,7)(\textcolor{red}{2},6)(4,5)$\\
+$(0,\textcolor{red}{3})(1,4)(\textcolor{red}{2},6)(5,7)$& &  $(0,\textcolor{red}{2})(1,4)(\textcolor{red}{3},6)(5,7)$\\
+$(0,4)(1,\textcolor{red}{3})(\textcolor{red}{2},5)(6,7)$& &  $(0,4)(1,\textcolor{red}{2})(\textcolor{red}{3},5)(6,7)$\\
+
+\end{tabular}
+\end{table}
 \end{frame}
 
 
 
 
-
-
-
-\begin{frame}{Комбинаторное описание дифференциальной равномерности}
-Тут аккуратно сформулировать цели и задачи проекта
+\begin{frame}{Задачи}
+\begin{itemize}
+    \item Разработать эффективный алгоритм вычисления дифференциальной равномерности при умножении подстановки на транспозицию
+    \item Разработать алгоритм построения подстановок с низкой дифференциальной равномерностью
+\end{itemize}
 \end{frame}
 
 
@@ -438,6 +484,8 @@ $$\scriptscriptstyle 38, 66, 187, 39, 240, 68, 220, 32, 120, 76, 55, 97, 161, 23
 \item Придумать и опробовать новые эвристики.
 \item Переписать код на более ``быстрый'' язык.
 \item Использовать более мощный компьютер для перебора.
+\item Изучить возможность <<эффективного>> построения группы G находящихся на большом расстоянии от $T$
+\item Изучить возможность описания <<легко проверяемого>> необходимого условия существования групп G с расстоянием $2^n-2$
 \end{itemize}
 
 \end{frame}
