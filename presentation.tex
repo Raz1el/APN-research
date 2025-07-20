@@ -1,0 +1,252 @@
+\documentclass[11pt]{beamer}
+\usetheme{Copenhagen}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+%\author{}
+%\title{}
+%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+%\institute{} 
+%\date{} 
+%\subject{} 
+\begin{document}
+
+%\begin{frame}
+%\titlepage
+%\end{frame}
+
+%\begin{frame}
+%\tableofcontents
+%\end{frame}
+
+%------------------------------------------------------------
+
+\begin{frame}{ВВЕДЕНИЕЕЕЕЕ}
+ВВЕДЕНИЕ
+\end{frame}
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+\begin{tikzpicture}
+
+    \node (Q1) at (0,0) {$S(\mathbb{F}_{2^n})$};
+    \node (Q2) at (1,2) {$f(x) = \sum\limits_{i=0}^n a_ix^i$};
+    \node (Q3) at (0,4) {APN-отображения};
+    \node (Q4) at (-3,2) {$F(x_1,...,x_n) = (f_1(x),...,f_n(x))$};
+
+    \draw (Q1)--(Q2);
+    \draw (Q1)--(Q4);
+    \draw (Q3)--(Q4);
+    \draw (Q2)--(Q3);
+    \draw [dashed,red, out=-1,in=0,distance=3cm](Q1) to node [pos=0.5, right,inner sep=0.25cm] {?}(Q3);
+
+    \end{tikzpicture}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+Рассмотрим симметрическую группу $S(\Omega)$ на множестве $\Omega$ из $n$ элементов.
+\begin{itemize}
+\item Расстоянием между подстановками $f,g \in S(\Omega)$  называется величина $$d(f,g) = |\{ x \in \Omega \; | \; f(x) \neq g(x)\} |$$
+
+\item Расстоянием между подгруппами $G,G' \leq S(\Omega)$ назовем $$d(G,G') = \min_{\substack{g \in G \setminus \{e\}  \\ g' \in G' \setminus \{e\}  }} d(g ,g')$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+\begin{block}{Утверждение}
+Пусть разложение в произведение независимых циклов $f,g \in S(\Omega)$ имеет вид: $$f = (x_1, y_1) ... (x_s, y_s) \tau_1 ... \tau_k,$$ $$ g=(x_1,y_1) ... (x_s, y_s) \sigma_1 ... \sigma_l,$$  где  $\tau_i, \sigma_j$  различные транспозиции.\\
+Тогда $$d(f,g) = n -2s - |fix(f) \cap fix(g)|,$$ 
+где $$fix(\pi) = \{ x \in \Omega \; | \; \pi(x) = x \}.$$
+\end{block}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+\begin{itemize}
+\item Далее будем рассматривать $\Omega = \mathbb{F}_{2^n}$
+\item Любой элемент поля $\alpha \in \mathbb{F}_{2^n}$ определяет биективное отображение 
+\begin{alignat*}{2}
+\tau_{\alpha} \colon \mathbb{F}_{2^n}&\rightarrow {}&& \mathbb{F}_{2^n} \\
+           x&\mapsto     {}&& x + \alpha \\        
+\end{alignat*}
+\item Множество таких отображений $T = \{ \tau_{ \alpha } \; | \; \alpha \in \mathbb{F}_{2^n} \}$ образует подгруппу симметрической группы $S(\mathbb{F}_{2^n})$
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+В работе использовалась следующая комбинаторная характеризация дифференциальной равномерности:
+\begin{block}{Утверждение}
+Пусть $f \in S(\mathbb{F}_{2^n})$, $T$ -- группа сдвигов, определенная выше, а $$G = f^{-1} \cdot T \cdot f = \{f^{-1} \cdot t \cdot f | t \in T \}.$$ Тогда подстановка f является дифференциально $\delta$-равномерной $ \iff d(G,T) = 2^n-\delta$
+\end{block}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Комбинаторное описание дифференциальной равномерности}
+\begin{block}{Утверждение}
+Пусть $G \cong T$ и $d(G,T) = \alpha$. Тогда если $\pi $ - транспозиция, то $$\alpha + 4 \geq d(\pi^{-1} \cdot G \cdot \pi, T) \geq \alpha - 4$$
+\end{block}
+
+Т.е. дифференциальная равномерность не может изменится более чем на 4 при умножении на транспозицию. \footnotemark[1]
+
+\footnotetext[1]{Yu, Y., Wang, M., Li, Y.: Constructing Differentially 4 Uniform Permutations from Known Ones. Chin.
+J. Electron. 22(3), 495–499 (2013)}
+\end{frame}
+
+
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+\begin{itemize}
+    \item Рассмотрим $\pi \in S(\mathbb{F}_{2^n})$ и $G = \pi^{-1} \cdot T \cdot \pi$.
+    \item Пусть $N = |\mathbb{F}_{2^{n}}|$, $G = \{g_{1}, \dots, g_{N - 1}\}$, $T = \{t_{1}, \dots, t_{N - 1}\}$.
+    \item Каждый элемент $t_i$ раскладывается в произведение независимых транспозиций $t_i=\tau_1^i \dots \tau_{\frac{N}{2}}^i$.
+    \item Зафиксируем некоторый элемент $g = \sigma_{1}\dots\sigma_{\frac{N}{2}} \in G$.
+    \item Определим множество $I(t_{i}, g) \stackrel{\text{def}}{:=} t_{i} \cap g$.
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Сложность построения множества $I(t_i,g)$ равна $O(N)$ и  $d(t_{i}, g) = N - 2 |I(t_{i}, g)|$
+\end{block}
+
+
+
+
+\end{frame}
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+\begin{itemize}
+    \item Определим
+$$I(g) \stackrel{\text{def}}{:=} \{I(t_{i}, g) \text{ } | \text{ } t_{i} \in T \},$$
+$$D(g) \stackrel{\text{def}}{:=} (I(g), \underset{i \in I(g)}{\max} {\{2 \cdot|i| \}})$$
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Сложность построения $D(g)$ равна $O(N^{2})$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+\begin{itemize}
+    \item Определим множество $\Delta(G) \stackrel{\text{def}}{:=} \{D(g) \text{ } | \text{ } g \in G\}$. 
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Дифференциальная равномерность подстановки $\pi$ равна $$\delta = \underset{(d_{1}, d_{2}) \in \Delta(G)}{\max} \{d_{2} \}.$$ Сложность вычисления $\delta$ равна $O(N^{3})$.
+\end{block}
+
+
+Сложность классического алгоритма $O(N^2)$...
+\end{frame}
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+
+Пусть $I(t_i,g)$ уже построено и $\sigma = (\alpha \beta)$ -- некоторая транспозиция.
+
+Тогда вычислить $I(t_i,\sigma^{-1}g\sigma)$ можно следующим образом:
+\begin{itemize}
+\item Если $\sigma = \sigma_i$, то $I(t_i,g)=I(t_i,\sigma^{-1}g\sigma)$
+\item Пусть $\sigma \neq \sigma_i$. Тогда $\exists \sigma_s=(\alpha, \alpha'),\sigma_r=(\beta, \beta')$ в разложении $g$. Тогда $$\sigma^{-1}g\sigma = \sigma_1...\sigma_s'...\sigma_r'...\sigma_{\frac{N}{2}}, \text{ где } \sigma_s'=(\beta, \alpha'),\sigma_r'=(\alpha, \beta').$$
+Таким образом $I(t_i, \sigma^{-1}g\sigma)$ получается из $I(t_i,g)$ удалением $\sigma_s,\sigma_r$ (если они там есть) и добавлением $\sigma_s',\sigma_r'$ (при условии, что они есть в разложении $t_i$)
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Сложность вычисления $I(t_i,\sigma^{-1}g\sigma)$ по известному $I(t_i,g)$ равна $O(1)$.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Алгоритм вычисления дифференциальной равномерности после умножения на транспозицию}
+
+Для вычисления множества $D(\sigma^{-1}g\sigma)$ по $D(g) = (I(g), d)$ нужно:
+\begin{itemize}
+\item Если $\sigma = \sigma_i$, то $D(g)$ не изменится
+\item Найти сдвиги $t(\sigma_s), t(\sigma_r), t(\sigma_s'), t(\sigma_r')$ и пересчитать $I(t(\sigma_s),g)$, $I(t(\sigma_r),g)$, $I( t(\sigma_s'),g)$, $I(t(\sigma_r'),g)$
+\item Обновить максимальное значение $d$.
+\end{itemize}
+
+\begin{block}{Утверждение}
+ Сложность вычисления $D(\sigma^{-1}g\sigma)$ по известному $D(g)$ равна $O(1)$.
+\end{block}
+
+\begin{block}{Утверждение}
+ Сложность вычисления $\Delta(\sigma^{-1} G  \sigma)$ по известному $\Delta(G)$ равна $O(N)$.
+\end{block}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Подходы к построению подстановок с низкой дифф. равномерностью}
+
+Наиболее удачные подходы:
+
+\begin{itemize}
+\item Полный перебор транспозиций.
+\item Перебор образующих транспозиций.
+\item Перебор транспозиций, образованных элементами пересечения.
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------------------
+
+
+
+
+\begin{frame}{``Комбинированный'' подход}
+
+После многочисленных экспериментов оказалось, что лучше всего справляется с задачей уменьшения дифференциальной равномерности ``комбинированный'' подход, который состоит из поочерёдного применения подходов с перебором образующих транспозиций и с перебором транспозиций, образованных элементами пересечения. Такой ``комбинированный'' подход позволяет стабильно снижать дифференциальную равномерность S-блока размерности 8 до значения 6.
+
+\end{frame}
+
+%------------------------------------------------------------
+
+
+\begin{frame}{ЭКСП}
+ВЫЧИСЛИТЕЛЬНЫЕ ЭКСПЕРИМЕНТЫ
+\end{frame}
+
+\begin{frame}{Направления дальнейшего исследования}
+
+\begin{itemize}
+\item Придумать и опробовать новые эвристики.
+\item Переписать код на более ``быстрый'' язык.
+\item Использовать более мощный компьютер для перебора.
+\end{itemize}
+
+\end{frame}
+\begin{frame}
+\centerline{Спасибо за внимание!}
+\end{frame}
+%------------------------------------------------------------
+
+\end{document}
